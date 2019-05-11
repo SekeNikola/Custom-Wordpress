@@ -7,5 +7,14 @@ function univeristy_files(){
   wp_enqueue_style('font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
   wp_enqueue_style('univeristy_main_style', get_stylesheet_uri(), NULL, microtime());
 };
-add_action('wp_enqueue_scripts', 'univeristy_files')
+add_action('wp_enqueue_scripts', 'univeristy_files');
+
+function univeristy_features(){
+  add_theme_support('title-tag');
+  // Adding menu to wordpress admin
+  register_nav_menu('headerMenuLocation', 'Header Menu Location');
+};
+add_action('after_setup_theme', 'univeristy_features');
+
 ?>
+
