@@ -58,13 +58,13 @@ if($theParent or  $testArray){?>
 </div>
 <?php } ?>
 <div class="generic-content">
- <?php
-   the_content()
- ?>
+  <?php
+    the_content()
+  ?>
 </div>
 
 </div>
-  <?php
+<?php
 }
 get_footer()
 ?>
