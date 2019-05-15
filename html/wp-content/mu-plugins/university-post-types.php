@@ -1,6 +1,7 @@
 <?php
-  function univerity_post_types(){
+  function university_post_types(){
     register_post_type('event', array(
+      'supports' => array('title', 'editor', 'excerpt'),
       'rewrite' =>array('slug' => 'events'),
       'has_archive' => true,
       'public' => true,
@@ -14,5 +15,5 @@
       ),
     ));
   }
-    add_action('init', 'univerity_post_types');
+    add_action('init', 'university_post_types');
 ?>
