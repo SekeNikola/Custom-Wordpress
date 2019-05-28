@@ -34,10 +34,22 @@ function Search() {
           }`;
           fetch(url)
             .then(res => res.json())
-            .then(out => {
-              alert(out[0].title.rendered);
+            .then(posts => {
+              console.log(posts);
+              resultsDiv.innerHTML = `
+              <h2 class="search-overlay__section-title">General Information
+              <ul class="link-list min list">
+                ${posts
+                  .map(
+                    item =>
+                      `<li><a href="${item.link}">${
+                        item.title.rendered
+                      }</a></li>`
+                  )
+                  .join("")}
+              </ul>
+              </h2>`;
             });
-
           isSpinnerVisible = false;
         }, 2000);
       } else {
