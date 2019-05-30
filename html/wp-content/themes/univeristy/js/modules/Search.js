@@ -9,16 +9,23 @@ function Search() {
   let isSpinnerVisible = false;
   let previusValue;
 
-  openButton.addEventListener("click", function() {
+  // OPEN SEARCH
+  openButton.addEventListener("click", function () {
     searchOverlay.classList.add("search-overlay--active");
     body.classList.add("body-no-scroll");
-  });
-  closeButton.addEventListener("click", function() {
-    searchOverlay.classList.remove("search-overlay--active");
-    body.classList.remove("body-no-scroll");
+    setTimeout(() => searchTerm.focus(), 1000)
   });
 
-  searchTerm.addEventListener("keyup", function() {
+  // CLOSE SEARCH
+  closeButton.addEventListener("click", function () {
+    searchOverlay.classList.remove("search-overlay--active");
+    body.classList.remove("body-no-scroll");
+    searchTerm.value = '';
+
+  });
+
+  // SHOW RESULTS
+  searchTerm.addEventListener("keyup", function () {
     if (searchTerm.value != previusValue) {
       clearTimeout(typingTimeout);
       if (searchTerm.value) {
@@ -28,18 +35,17 @@ function Search() {
           resultsDiv.appendChild(div);
           isSpinnerVisible = true;
         }
-        typingTimeout = setTimeout(function() {
-          let url = `http://localhost:8000/wp-json/wp/v2/posts?search=${
+        typingTimeout = setTimeout(function () {
+          let url = `${univeristyData.root_url}/wp-json/wp/v2/posts?search=${
             searchTerm.value
           }`;
           fetch(url)
             .then(res => res.json())
             .then(posts => {
-              console.log(posts);
               resultsDiv.innerHTML = `
               <h2 class="search-overlay__section-title">General Information
-              <ul class="link-list min list">
-                ${posts
+              ${ posts.length ? '<ul class="link-list min list">' : '<p>No informations found</p>' }
+              ${posts
                   .map(
                     item =>
                       `<li><a href="${item.link}">${
@@ -47,8 +53,8 @@ function Search() {
                       }</a></li>`
                   )
                   .join("")}
-              </ul>
-              </h2>`;
+                      ${posts.length ? '</ul>' : ''}
+                  `;
             });
           isSpinnerVisible = false;
         }, 2000);
