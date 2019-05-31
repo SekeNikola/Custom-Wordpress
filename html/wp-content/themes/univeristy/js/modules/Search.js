@@ -43,14 +43,15 @@ function Search() {
             .then(res => res.json())
             .then(posts => {
               resultsDiv.innerHTML = `
-              <h2 class="search-overlay__section-title">General Information
-              ${ posts.length ? '<ul class="link-list min list">' : '<p>No informations found</p>' }
+              <h2 class="search-overlay__section-title">General Information</h2>
+              ${ posts.length ? '<ul class="link-list min-list">' : '<p>No informations found</p>' }
               ${posts
                   .map(
                     item =>
                       `<li><a href="${item.link}">${
                         item.title.rendered
-                      }</a></li>`
+                      }</a> ${item.type == 'post' ? `by ${item.authorName}` : ''}
+                      </li>`
                   )
                   .join("")}
                       ${posts.length ? '</ul>' : ''}
