@@ -4,6 +4,8 @@ function university_post_types()
   // Events Post Type
   register_post_type('event', array(
     'supports' => array('title', 'editor', 'excerpt'),
+    'capability_type' => 'event',
+    'map_meta_cap' => true,
     'rewrite' => array('slug' => 'events'),
     'has_archive' => true,
     'public' => true,
@@ -34,6 +36,7 @@ function university_post_types()
 
   // Professors Post Type
   register_post_type('professor', array(
+    'show_in_rest' => true,
     'supports' => array('title', 'editor','thumbnail'),
     'public' => true,
     'menu_icon' => 'dashicons-welcome-learn-more',
@@ -48,6 +51,8 @@ function university_post_types()
 
   // Campust Post Type
   register_post_type('campus', array(
+    'capability_type' => 'campus',
+    'map_meta_cap' => true,
     'supports' => array('title', 'editor','thumbnail'),
     'rewrite' => array('slug' => 'campuses'),
     'public' => true,
